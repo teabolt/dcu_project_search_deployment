@@ -1,6 +1,5 @@
 # Secret files
-.config/
-.env
+*.env
 
 # VSCode
 *.code-workspace

@@ -3,7 +3,7 @@ services:
   frontend:
     image: dcu-project-search-frontend:latest
     env_file:
-      - frontend.env.prod
+      - frontend.env
     # these services will be started before this one
     depends_on:
       - backend
@@ -14,7 +14,7 @@ services:
   backend:
     image: dcu-project-search-backend:latest
     env_file:
-      - backend.env.prod
+      - backend.env
     volumes:
       - backend:/var/lib/backend
     # use host ports
