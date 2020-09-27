@@ -3,6 +3,7 @@ services:
   frontend:
     image: dcu-project-search-frontend:latest
     env_file:
+      # Note that REACT_APP_* environment variables cannot be changed after React build.
       - frontend.env
     # these services will be started before this one
     depends_on:
