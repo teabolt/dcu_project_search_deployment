@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   frontend:
-    image: dcu-project-search-frontend:latest
+    image: tomasbalt/dcu_project_search_frontend:latest
     env_file:
       # Note that REACT_APP_* environment variables cannot be changed after React build.
       - frontend.env
@@ -13,7 +13,7 @@ services:
     # use host ports
     network_mode: "host"
   backend:
-    image: dcu-project-search-backend:latest
+    image: tomasbalt/dcu_project_search_backend:latest
     env_file:
       - backend.env
     volumes:
