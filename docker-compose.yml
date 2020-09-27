@@ -11,7 +11,8 @@ services:
     volumes:
       - frontend:/var/lib/frontend
       # For HTTPS certs
-      - /etc/letsencrypt/live/tomasb.ie:/etc/letsencrypt/live/tomasb.ie
+      - ${SSL_KEY}:${SSL_KEY}
+      - ${SSL_CERT}:${SSL_CERT}
     # use host ports
     network_mode: "host"
   backend:
@@ -21,7 +22,8 @@ services:
     volumes:
       - backend:/var/lib/backend
         # For HTTPS certs
-      - /etc/letsencrypt/live/tomasb.ie:/etc/letsencrypt/live/tomasb.ie
+      - ${SSL_KEY}:${SSL_KEY}
+      - ${SSL_CERT}:${SSL_CERT}
     # use host ports
     network_mode: "host"
 
