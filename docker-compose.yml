@@ -10,6 +10,8 @@ services:
       - backend
     volumes:
       - frontend:/var/lib/frontend
+      # For HTTPS certs
+      - /etc/letsencrypt/live/tomasb.ie:/etc/letsencrypt/live/tomasb.ie
     # use host ports
     network_mode: "host"
   backend:
@@ -18,6 +20,8 @@ services:
       - backend.env
     volumes:
       - backend:/var/lib/backend
+        # For HTTPS certs
+      - /etc/letsencrypt/live/tomasb.ie:/etc/letsencrypt/live/tomasb.ie
     # use host ports
     network_mode: "host"
 
