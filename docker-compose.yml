@@ -11,8 +11,8 @@ services:
     volumes:
       - frontend:/var/lib/frontend
       # For HTTPS certs
-      - ${SSL_KEY}:${SSL_KEY}
-      - ${SSL_CERT}:${SSL_CERT}
+      - ${FRONTEND_SSL_KEY}:${FRONTEND_SSL_KEY}
+      - ${FRONTEND_SSL_CERT}:${FRONTEND_SSL_CERT}
     # use host ports
     network_mode: "host"
   backend:
@@ -22,8 +22,8 @@ services:
     volumes:
       - backend:/var/lib/backend
         # For HTTPS certs
-      - ${SSL_KEY}:${SSL_KEY}
-      - ${SSL_CERT}:${SSL_CERT}
+      - ${BACKEND_SSL_KEY}:${BACKEND_SSL_KEY}
+      - ${BACKEND_SSL_CERT}:${BACKEND_SSL_CERT}
     # use host ports
     network_mode: "host"
 
