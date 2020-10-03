@@ -2,8 +2,10 @@ version: "3.8"
 services:
   frontend:
     image: tomasbalt/dcu_project_search_frontend:latest
+    environment:
+      # Needed before loading variables from env_file
+      - NODE_ENV=${NODE_ENV}
     env_file:
-      # Note that REACT_APP_* environment variables cannot be changed after React build.
       - frontend.env
     # these services will be started before this one
     depends_on:
@@ -17,6 +19,9 @@ services:
     network_mode: "host"
   backend:
     image: tomasbalt/dcu_project_search_backend:latest
+    environment:
+      # Needed before loading variables from env_file
+      - NODE_ENV=${NODE_ENV}
     env_file:
       - backend.env
     volumes:
