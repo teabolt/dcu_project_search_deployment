@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   frontend:
-    image: tomasbalt/dcu_project_search_frontend:latest
+    image: tomasbalt/dcu_project_search_frontend:${FE_VERSION}
     environment:
       # Needed before loading variables from env_file
       - NODE_ENV=${NODE_ENV}
@@ -18,7 +18,7 @@ services:
     # use host ports
     network_mode: "host"
   backend:
-    image: tomasbalt/dcu_project_search_backend:latest
+    image: tomasbalt/dcu_project_search_backend:${BE_VERSION}
     environment:
       # Needed before loading variables from env_file
       - NODE_ENV=${NODE_ENV}
