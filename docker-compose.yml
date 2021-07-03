@@ -1,5 +1,8 @@
 version: "3.8"
 services:
+  ##
+  # Application services
+  ##
   frontend:
     image: tomasbalt/dcu_project_search_frontend:${FE_VERSION}
     environment:
@@ -17,6 +20,14 @@ services:
       - ${FRONTEND_SSL_CERT}:${FRONTEND_SSL_CERT}
     # use host ports
     network_mode: "host"
+    # where to write logs
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: ${FLUENTD_ADDRESS}
+        tag: frontend
+        # connect to driver once it is available
+        fluentd-async-connect: "true"
   backend:
     image: tomasbalt/dcu_project_search_backend:${BE_VERSION}
     environment:
@@ -31,6 +42,41 @@ services:
       - ${BACKEND_SSL_CERT}:${BACKEND_SSL_CERT}
     # use host ports
     network_mode: "host"
+    # where to write logs
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: ${FLUENTD_ADDRESS}
+        tag: backend
+        # connect to driver once it is available
+        fluentd-async-connect: "true"
+  ##
+  # Logging and management services
+  ##
+  # logging driver
+  fluentd:
+    image: tomasbalt/dcu_project_search_fluentd:${FLUENTD_IMAGE_VERSION}
+    environment:
+      # Set the name of the fluentd configuration file
+      - FLUENTD_CONF=fluentd.conf
+      - ES_HOST=${ES_HOST}
+    # use host ports
+    network_mode: "host"
+    ports:
+      # HTTP input support
+      - "9880:9880"
+      # TCP input support
+      - "24224:24224"
+      - "24224:24224/udp"
+  # elasticsearch and logs visualisation app
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+    environment:
+      - ELASTICSEARCH_HOSTS=${ES_HOST}
+    # use host ports
+    network_mode: "host"
+    ports:
+      - "5601:5601"
 
 volumes:
   frontend:
